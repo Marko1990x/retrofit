@@ -5,4 +5,8 @@
     <string name="fab3">fab3</string>
     <string name="url_manipulation_path_query_querymap_url">URL MANIPULATION: @PATH @QUERY @QUERYMAP @URL</string>
     <string name="fab4">fab4</string>
+    <string name="postfabbutton">PostFabButton</string>
+    <string name="fabformendoding">fabFormEndoding</string>
+    <string name="postshashmap">postsHashmap</string>
+    <string name="post_request_amp_form_urlencoded"><![CDATA[POST REQUEST & FORM URLENCODED]]></string>
 </resources>

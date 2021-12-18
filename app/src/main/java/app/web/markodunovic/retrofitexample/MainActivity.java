@@ -28,7 +28,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
 
     private TextView textViewResult;
-    private FloatingActionButton fab1,fab2,fab3,fab4;
+    private FloatingActionButton fab1,fab2,fab3,fab4,fab5PostButton,
+            fabPostFormEncoding,fabPostsFieldMap;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
 
     @Override
@@ -75,6 +76,137 @@ public class MainActivity extends AppCompatActivity {
                 urlSausage();
             }
         });
+        fab5PostButton = findViewById(R.id.fab_btn_5);
+        fab5PostButton.setImageBitmap(textAsBitmap("5",40,Color.WHITE));
+        fab5PostButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                postToServer();
+            }
+        });
+        fabPostFormEncoding = findViewById(R.id.fab_btn_6);
+        fabPostFormEncoding.setImageBitmap(textAsBitmap("6",40,Color.WHITE));
+        fabPostFormEncoding.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                formEncodingPost();
+            }
+        });
+        fabPostsFieldMap = findViewById(R.id.fab_btn_7);
+        fabPostsFieldMap.setImageBitmap(textAsBitmap("7",40,Color.WHITE));
+        fabPostsFieldMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                postHashMap();
+            }
+        });
+    }
+
+    private void postHashMap() {
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://jsonplaceholder.typicode.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+
+        Map<String,String> fields = new HashMap<>();
+        fields.put("userId","25");
+        fields.put("title","new title");
+
+        Call<Post> call = jsonPlaceHolderApi.createPost(fields);
+        call.enqueue(new Callback<Post>() {
+            @Override
+            public void onResponse(Call<Post> call, Response<Post> response) {
+                if (!response.isSuccessful()){
+                    textViewResult.setText("Code: "+response.code());
+                    return;
+                }
+                Post postResponse = response.body();
+                String content = "";
+                content += "Http Code: "+response.code() +"\n";
+                assert postResponse != null;
+                content += "Auto Gen ID: "+postResponse.getId() +"\n";
+                content += "User ID: " +postResponse.getUserId() +"\n";
+                content += "Title: " + postResponse.getTitle()+"\n";
+                content += "Text: " +postResponse.getText()+ "\n\n";
+                textViewResult.setText(content);
+            }
+
+            @Override
+            public void onFailure(Call<Post> call, Throwable t) {
+                textViewResult.setText(t.getMessage());
+            }
+        });
+    }
+
+    private void formEncodingPost() {
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://jsonplaceholder.typicode.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+        Call<Post> call = jsonPlaceHolderApi.createPost(23,"new title","new Text");
+        call.enqueue(new Callback<Post>() {
+            @Override
+            public void onResponse(Call<Post> call, Response<Post> response) {
+                if (!response.isSuccessful()){
+                    textViewResult.setText("Code: "+response.code());
+                    return;
+                }
+                Post postResponse = response.body();
+                String content = "";
+                content += "Http Code: "+response.code() +"\n";
+                assert postResponse != null;
+                content += "Auto Gen ID: "+postResponse.getId() +"\n";
+                content += "User ID: " +postResponse.getUserId() +"\n";
+                content += "Title: " + postResponse.getTitle()+"\n";
+                content += "Text: " +postResponse.getText()+ "\n\n";
+                textViewResult.setText(content);
+            }
+
+            @Override
+            public void onFailure(Call<Post> call, Throwable t) {
+                textViewResult.setText(t.getMessage());
+            }
+        });
+
+    }
+
+    private void postToServer() {
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://jsonplaceholder.typicode.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+        Post post = new Post(3,"new title","new text");
+        Call<Post> call = jsonPlaceHolderApi.createPost(post);
+        call.enqueue(new Callback<Post>() {
+            @Override
+            public void onResponse(Call<Post> call, Response<Post> response) {
+                if (!response.isSuccessful()){
+                    textViewResult.setText("Code: "+response.code());
+                    return;
+                }
+                Post postResponse = response.body();
+                String content = "";
+                content += "Http Code: "+response.code() +"\n";
+                assert postResponse != null;
+                content += "Auto Gen ID: "+postResponse.getId() +"\n";
+                content += "User ID: " +postResponse.getUserId() +"\n";
+                content += "Title: " + postResponse.getTitle()+"\n";
+                content += "Text: " +postResponse.getText()+ "\n\n";
+                textViewResult.setText(content);
+            }
+
+            @Override
+            public void onFailure(Call<Post> call, Throwable t) {
+                textViewResult.setText(t.getMessage());
+            }
+        });
+
     }
 
     private void urlSausage() {

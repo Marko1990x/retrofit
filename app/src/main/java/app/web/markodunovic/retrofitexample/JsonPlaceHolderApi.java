@@ -4,7 +4,12 @@ import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
@@ -16,6 +21,7 @@ public interface JsonPlaceHolderApi {
     //this is just an endpoint
     //if i use a querry then it must be the same as what is
     //expected on the html sausage
+    //query parameters are sent directly over the url
     @GET("posts")
     Call<List<Post>> getPosts(
             @Query("userId")Integer[] userId,
@@ -43,4 +49,23 @@ public interface JsonPlaceHolderApi {
 
     @GET
     Call<List<Comment>> getComments(@Url String url);
+
+
+    @POST("posts")
+    Call<Post>createPost(@Body Post post);
+
+    // different encoding on the url sausage
+    // fields are sent over the http body
+    @FormUrlEncoded
+    @POST("posts")
+    Call<Post> createPost(
+            @Field("userId") int userId,
+            @Field("title") String title,
+            @Field("body") String text
+    );
+
+    @FormUrlEncoded
+    @POST("posts")
+    Call<Post> createPost(@FieldMap Map<String,String>fields);
+
 }

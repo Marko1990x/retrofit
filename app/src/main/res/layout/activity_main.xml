@@ -25,11 +25,14 @@
 
 
     <TextView
-        android:layout_above="@id/fab_btn_1"
+        android:id="@+id/textAreaFirst"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/url_manipulation_path_query_querymap_url"
-        />
+        android:layout_above="@id/fab_btn_1"
+        android:textAlignment="textStart"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="@string/url_manipulation_path_query_querymap_url" />
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -73,4 +76,43 @@
         android:layout_marginBottom="10dp"
         android:layout_marginEnd="10dp"
         android:contentDescription="@string/fab4" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_btn_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/textAreaFirst"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="10dp"
+        android:contentDescription="@string/postfabbutton" />
+
+    <TextView
+        android:id="@+id/text2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/fab_btn_5"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="@string/post_request_amp_form_urlencoded"
+        android:textAlignment="textStart" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_btn_6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/textAreaFirst"
+        android:layout_marginBottom="10dp"
+        android:layout_toStartOf="@id/fab_btn_5"
+        android:contentDescription="@string/fabformendoding" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_btn_7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/textAreaFirst"
+        android:layout_toStartOf="@id/fab_btn_6"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:contentDescription="@string/postshashmap" />
+
 </RelativeLayout>
