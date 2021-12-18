@@ -2,4 +2,7 @@
     <string name="app_name">retrofitexample</string>
     <string name="option_1_button">option 1 button</string>
     <string name="option2">Option2</string>
+    <string name="fab3">fab3</string>
+    <string name="url_manipulation_path_query_querymap_url">URL MANIPULATION: @PATH @QUERY @QUERYMAP @URL</string>
+    <string name="fab4">fab4</string>
 </resources>

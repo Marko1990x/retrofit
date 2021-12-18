@@ -23,6 +23,15 @@
 
     </androidx.core.widget.NestedScrollView>
 
+
+    <TextView
+        android:layout_above="@id/fab_btn_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/url_manipulation_path_query_querymap_url"
+        />
+
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_btn_1"
         android:layout_width="wrap_content"
@@ -43,4 +52,25 @@
         android:layout_marginBottom="10dp"
         android:contentDescription="@string/option2" />
 
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_btn_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@id/fab_btn_2"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:contentDescription="@string/fab3" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_btn_4"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/fab_btn_3"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="10dp"
+        android:contentDescription="@string/fab4" />
 </RelativeLayout>
