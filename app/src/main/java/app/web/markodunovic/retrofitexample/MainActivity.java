@@ -19,6 +19,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -26,7 +28,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
-
+    private HttpLoggingInterceptor httpLoggingInterceptor =  new HttpLoggingInterceptor();
+    private OkHttpClient okHttpClient2 = new OkHttpClient.Builder().
+            addInterceptor(httpLoggingInterceptor)
+            .build();;
     private TextView textViewResult;
     private FloatingActionButton fab1,fab2,fab3,fab4,fab5PostButton,
             fabPostFormEncoding,fabPostsFieldMap,fab8,fab9,fab10;
@@ -34,26 +39,33 @@ public class MainActivity extends AppCompatActivity {
     private Retrofit retrofit2 = new Retrofit.Builder()
             .baseUrl("https://jsonplaceholder.typicode.com/")
             .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient2)
             .build();;
     private JsonPlaceHolderApiPart2 jsonPlaceHolderApiPart2 =
             retrofit2.create(JsonPlaceHolderApiPart2.class);
+
+
 
 
     //to force gson to serialize nulls use
     // Gson gson = new Gson.Builder().serializeNulls().create();
     // pass the gson to the GsonConverterFactory.create(gson)
 
-    //todo continue latter https://www.youtube.com/watch?v=R2c5Pv5cXc0 part 5
     //todo continue latter https://www.youtube.com/watch?v=c1b2HehvL2M part 6 headers
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
         textViewResult = findViewById(R.id.text_view_result);
+        setInterceptor();
         setButtons();
+    }
+
+    private void setInterceptor() {
+        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        // add to desired retrofit object i use it on all methods that have interface 2 since its global
+
     }
 
     private void setButtons() {
