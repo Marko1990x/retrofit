@@ -29,8 +29,22 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView textViewResult;
     private FloatingActionButton fab1,fab2,fab3,fab4,fab5PostButton,
-            fabPostFormEncoding,fabPostsFieldMap;
+            fabPostFormEncoding,fabPostsFieldMap,fab8,fab9,fab10;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
+    private Retrofit retrofit2 = new Retrofit.Builder()
+            .baseUrl("https://jsonplaceholder.typicode.com/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();;
+    private JsonPlaceHolderApiPart2 jsonPlaceHolderApiPart2 =
+            retrofit2.create(JsonPlaceHolderApiPart2.class);
+
+
+    //to force gson to serialize nulls use
+    // Gson gson = new Gson.Builder().serializeNulls().create();
+    // pass the gson to the GsonConverterFactory.create(gson)
+
+    //todo continue latter https://www.youtube.com/watch?v=R2c5Pv5cXc0 part 5
+    //todo continue latter https://www.youtube.com/watch?v=c1b2HehvL2M part 6 headers
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +53,10 @@ public class MainActivity extends AppCompatActivity {
 
 
         textViewResult = findViewById(R.id.text_view_result);
+        setButtons();
+    }
+
+    private void setButtons() {
         fab1 = findViewById(R.id.fab_btn_1);
         fab1.setImageBitmap(textAsBitmap("1", 40, Color.WHITE));
         fab1.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +118,110 @@ public class MainActivity extends AppCompatActivity {
                 postHashMap();
             }
         });
+        fab8 = findViewById(R.id.fab_btn_8);
+        fab8.setImageBitmap(textAsBitmap("8",40,Color.WHITE));
+        fab8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updatePost();
+            }
+        });
+        fab9 = findViewById(R.id.fab_btn_9);
+        fab9.setImageBitmap(textAsBitmap("9",40,Color.WHITE));
+        fab9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                patchPost();
+            }
+        });
+        fab10 = findViewById(R.id.fab_btn_10);
+        fab10.setImageBitmap(textAsBitmap("10",40,Color.WHITE));
+        fab10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                yeet();
+            }
+        });
     }
+
+    private void yeet() {
+
+        Call<Void> call = jsonPlaceHolderApiPart2.deletePost(5);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                textViewResult.setText("Code"+response.code());
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                textViewResult.setText("Code" +t.getMessage());
+            }
+        });
+
+    }
+
+    private void updatePost() {
+
+        Post post = new Post(12,null,"New Text");
+        Call<Post> call = jsonPlaceHolderApiPart2.putPost(5,post);
+        call.enqueue(new Callback<Post>() {
+            @Override
+            public void onResponse(Call<Post> call, Response<Post> response) {
+                if (!response.isSuccessful()){
+                    textViewResult.setText("Code: "+response.code());
+                    return;
+                }
+
+                Post postResponse = response.body();
+                String content = "";
+                content += "Http Code: "+response.code() +"\n";
+                assert postResponse != null;
+                content += "Auto Gen ID: "+postResponse.getId() +"\n";
+                content += "User ID: " +postResponse.getUserId() +"\n";
+                content += "Title: " + postResponse.getTitle()+"\n";
+                content += "Text: " +postResponse.getText()+ "\n\n";
+                textViewResult.setText(content);
+            }
+
+            @Override
+            public void onFailure(Call<Post> call, Throwable t) {
+                textViewResult.setText(t.getMessage());
+            }
+        });
+
+    }
+    private void patchPost() {
+
+        Post post = new Post(12,null,"New Text");
+        Call<Post> call = jsonPlaceHolderApiPart2.patchPost(5,post);
+        call.enqueue(new Callback<Post>() {
+            @Override
+            public void onResponse(Call<Post> call, Response<Post> response) {
+                if (!response.isSuccessful()){
+                    textViewResult.setText("Code: "+response.code());
+                    return;
+                }
+
+                Post postResponse = response.body();
+                String content = "";
+                content += "Http Code: "+response.code() +"\n";
+                assert postResponse != null;
+                content += "Auto Gen ID: "+postResponse.getId() +"\n";
+                content += "User ID: " +postResponse.getUserId() +"\n";
+                content += "Title: " + postResponse.getTitle()+"\n";
+                content += "Text: " +postResponse.getText()+ "\n\n";
+                textViewResult.setText(content);
+            }
+
+            @Override
+            public void onFailure(Call<Post> call, Throwable t) {
+                textViewResult.setText(t.getMessage());
+            }
+        });
+
+    }
+
 
     private void postHashMap() {
 

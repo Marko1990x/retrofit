@@ -9,7 +9,11 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@id/centerFucker"
+        android:background="@drawable/border1"
+        android:scrollIndicators="left"
+        android:scrollbars="vertical">
 
         <TextView
             android:id="@+id/text_view_result"
@@ -23,96 +27,140 @@
 
     </androidx.core.widget.NestedScrollView>
 
-
     <TextView
-        android:id="@+id/textAreaFirst"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/fab_btn_1"
-        android:textAlignment="textStart"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:text="@string/url_manipulation_path_query_querymap_url" />
-
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_btn_1"
+        android:id="@+id/centerFucker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:fabSize="normal"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="10dp"
-        android:contentDescription="@string/option_1_button" />
+        android:layout_centerInParent="true" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom">
+
+            <TextView
+                android:id="@+id/textAreaFirst"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/fab_btn_1"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/url_manipulation_path_query_querymap_url"
+                android:textAlignment="textStart" />
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_btn_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toStartOf="@id/fab_btn_1"
-        android:layout_marginBottom="10dp"
-        android:contentDescription="@string/option2" />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_btn_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="10dp"
+                android:contentDescription="@string/option_1_button"
+                app:fabSize="normal" />
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_btn_3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toStartOf="@id/fab_btn_2"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:contentDescription="@string/fab3" />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_btn_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="10dp"
+                android:layout_toStartOf="@id/fab_btn_1"
+                android:contentDescription="@string/option2" />
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_btn_4"
-        android:layout_alignParentBottom="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toStartOf="@id/fab_btn_3"
-        android:layout_marginBottom="10dp"
-        android:layout_marginEnd="10dp"
-        android:contentDescription="@string/fab4" />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_btn_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toStartOf="@id/fab_btn_2"
+                android:contentDescription="@string/fab3" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_btn_5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/textAreaFirst"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="10dp"
-        android:contentDescription="@string/postfabbutton" />
 
-    <TextView
-        android:id="@+id/text2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/fab_btn_5"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:text="@string/post_request_amp_form_urlencoded"
-        android:textAlignment="textStart" />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_btn_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toStartOf="@id/fab_btn_3"
+                android:contentDescription="@string/fab4" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_btn_6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/textAreaFirst"
-        android:layout_marginBottom="10dp"
-        android:layout_toStartOf="@id/fab_btn_5"
-        android:contentDescription="@string/fabformendoding" />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_btn_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/textAreaFirst"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="10dp"
+                android:contentDescription="@string/postfabbutton" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_btn_7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/textAreaFirst"
-        android:layout_toStartOf="@id/fab_btn_6"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:contentDescription="@string/postshashmap" />
+            <TextView
+                android:id="@+id/text2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/fab_btn_5"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/post_request_amp_form_urlencoded"
+                android:textAlignment="textStart" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_btn_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/textAreaFirst"
+                android:layout_marginBottom="10dp"
+                android:layout_toStartOf="@id/fab_btn_5"
+                android:contentDescription="@string/fabformendoding" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_btn_7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/textAreaFirst"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toStartOf="@id/fab_btn_6"
+                android:contentDescription="@string/postshashmap" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_btn_8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/textAreaFirst"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toStartOf="@id/fab_btn_7"
+                android:contentDescription="@string/postshashmap" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_btn_9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/textAreaFirst"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toStartOf="@id/fab_btn_8"
+                android:contentDescription="@string/postshashmap" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_btn_10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/textAreaFirst"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toStartOf="@id/fab_btn_9"
+                android:contentDescription="@string/postshashmap" />
+
+
+
+        </RelativeLayout>
 
 </RelativeLayout>
