@@ -1,5 +1,6 @@
 package app.web.markodunovic.retrofitexample;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
 
@@ -15,11 +16,14 @@ import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,8 +33,20 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
     private HttpLoggingInterceptor httpLoggingInterceptor =  new HttpLoggingInterceptor();
-    private OkHttpClient okHttpClient2 = new OkHttpClient.Builder().
-            addInterceptor(httpLoggingInterceptor)
+    private OkHttpClient okHttpClient2 = new OkHttpClient.Builder()
+            .addInterceptor(new Interceptor() {
+                @NonNull
+                @Override
+                public okhttp3.Response intercept(@NonNull Chain chain) throws IOException {
+                    Request request = chain.request();
+
+                    Request newRequest = request.newBuilder().header(
+                            "Interceptor-Header","xyz"
+                    ).build();
+                    return chain.proceed(newRequest);
+                }
+            })
+            .addInterceptor(httpLoggingInterceptor)
             .build();;
     private TextView textViewResult;
     private FloatingActionButton fab1,fab2,fab3,fab4,fab5PostButton,
@@ -46,12 +62,11 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
+    // by default json rejects null values
     //to force gson to serialize nulls use
     // Gson gson = new Gson.Builder().serializeNulls().create();
     // pass the gson to the GsonConverterFactory.create(gson)
 
-    //todo continue latter https://www.youtube.com/watch?v=c1b2HehvL2M part 6 headers
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -176,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
     private void updatePost() {
 
         Post post = new Post(12,null,"New Text");
-        Call<Post> call = jsonPlaceHolderApiPart2.putPost(5,post);
+        Call<Post> call = jsonPlaceHolderApiPart2.putPost("abc",5,post);
         call.enqueue(new Callback<Post>() {
             @Override
             public void onResponse(Call<Post> call, Response<Post> response) {
@@ -206,7 +221,12 @@ public class MainActivity extends AppCompatActivity {
     private void patchPost() {
 
         Post post = new Post(12,null,"New Text");
-        Call<Post> call = jsonPlaceHolderApiPart2.patchPost(5,post);
+        Map<String,String> stringMap = new HashMap<>();
+        stringMap.put("Map-Header1","def");
+        stringMap.put("Map-Header2","ghi");
+
+
+        Call<Post> call = jsonPlaceHolderApiPart2.patchPost(stringMap,5,post);
         call.enqueue(new Callback<Post>() {
             @Override
             public void onResponse(Call<Post> call, Response<Post> response) {
